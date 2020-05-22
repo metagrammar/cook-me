@@ -8,7 +8,7 @@ import './App.css';
 function Home(props) {
   return (
     <div className="App">
-        <Highlight gotRecipes={props.gotRecipes}/>
+        <Highlight gotRecipes={props.initial}/>
         <ResultsMain gotRecipes={props.gotRecipes} searchToggle={props.searchToggle} search={props.search} filters={props.filters} resetFilter={props.resetFilter}/>
         <Footer />
     </div>

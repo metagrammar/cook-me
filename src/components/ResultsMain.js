@@ -3,20 +3,21 @@ import { Link, useHistory } from "react-router-dom";
 import { CardMedia } from '@material-ui/core';
 import './ResultsMain.css';
 
+
 const ResultsMain = (props) => {
     const history = useHistory();
-    console.log({resultsMain: props.gotRecipes.fields})
     return (
         <>
         <div className='results-cards'>
             <h1 className='main-results'>{props.searchToggle===1?`Searched by ${props.search}`:"Latest Recipes"}</h1>
             {props.filters.length>0?
             <div className="matches">
-                <h2 className='filter-results'>Filtered by <span> {props.filters } </span> with {props.gotRecipes.length} match(es)...</h2>
+                <h2 className='filter-results'>Filtered by <span> {props.filters.toString().replace(/,/g, ", ") } </span> with {props.gotRecipes.length} match(es)...</h2>
                 <button className='reset-filter' onClick={()=>props.resetFilter()}>Reset Filter</button>
             </div>:null}
             <div className='cards-wrap'>
-                {props.gotRecipes.map(recipe =>  
+            {props.gotRecipes.length>=1?
+                props.gotRecipes.map(recipe =>  
                     recipe.sys.contentType.sys.id === 'recipe'? 
                     <Link
                         to= ' '
@@ -28,7 +29,11 @@ const ResultsMain = (props) => {
                     <h3 className='recipe-card-title'>{recipe.fields.recipeTitle}</h3>
                      </Link>
                      : ''
-                     )}
+                     ):
+                     <div className="matches" style={{flexDirection: "column", textAlign:"center", alignItems:"center", padding:"200px 0"}}>
+                        <h1>There are no recipes matching your search.</h1>
+                        <button onClick={()=>window.location.reload()} style={{width:"100px", height:"39px"}}>Back</button>
+                    </div>}
             </div>
         </div>
         </>

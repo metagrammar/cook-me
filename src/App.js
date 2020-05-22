@@ -83,8 +83,8 @@ function App() {
       <Navigation onSearch={searchHandler} getFilter={filterHandler}/>
       {!recipes?'': 
       <Switch>
-        <Route path='/:recipe' render={props => <RecipePage gotRecipes={recipes} {...props} />} />
-        <Route exact path='/' render={props => <Home gotRecipes={recipes} gotCategories={categories} searchToggle={searchToggle} search={search} filters={catFilter} resetFilter={resetFilter} {...props} />} />
+        <Route path='/:recipe' render={props => <RecipePage gotRecipes={recipes} initial={initial} {...props} />} />
+        <Route exact path='/' render={props => <Home initial={initial} gotRecipes={recipes} gotCategories={categories} searchToggle={searchToggle} search={search} filters={catFilter} resetFilter={resetFilter} {...props} />} />
       </Switch>
       }
     </div>
