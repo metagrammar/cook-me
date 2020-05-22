@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import Home from './Home'
 import Navigation from './components/navigation'
 import RecipePage from './RecipePage'
@@ -21,10 +21,12 @@ function App() {
   const [categories, setCategories] = useState()
   const [catFilter, setCatFilter] = useState([])
   const [firstRun, setFirstRun] = useState(true);
+  const history = useHistory();
 
 
 //HELPER FUNCTIONS
   const searchHandler = (searchquery) => {
+    history.push('/')
     setSearchToggle(1)
     setSearch(searchquery)
     }
