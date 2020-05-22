@@ -41,11 +41,14 @@ function App() {
       ))
   }
 
+  
   const resetFilter = () => {
     setCatFilter([])
   }
 
 
+
+// USE EFFECTS
   useEffect( () => {
     client.getEntries({
       content_type: 'categories'})
@@ -80,6 +83,11 @@ function App() {
     } else setFirstRun(false)
   }, [catFilter]);
 
+
+
+
+
+  // RETURN
   return (
     <div>
       <Navigation onSearch={searchHandler} getFilter={filterHandler}/>
