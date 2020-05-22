@@ -19,7 +19,7 @@ const ResultsMore = ({gotRecipes}) => {
                     <Link
                         to= ' '
                         style={{textDecoration: 'none'}}
-                        onClick={(e) =>{ history.push(`/${recipe.fields.slug}`);window.scrollTo(0,0); e.preventDefault()}} 
+                        onClick={(e) =>{ history.push(`/${recipe.fields.slug}`); window.scrollTo(0,0); e.preventDefault()}} 
                         key={recipe.sys.id}
                         >
                     <CardMedia className='main-card' image={recipe.fields.recipeHeroImage.fields.file.url} />
