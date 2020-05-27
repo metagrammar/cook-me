@@ -13,7 +13,7 @@ const ResultsMore = ({gotRecipes}) => {
         <h2 className='main-results'>Other recipes you may be interessted in</h2>
             <div className='cards-wrap'>
             <div className='cards-wrap'>
-                {gotRecipes.slice(0,2).map(recipe => 
+                {gotRecipes.slice(7,9).map(recipe => 
                     recipe.sys.contentType.sys.id === 'recipe'? 
                     <>
                     <Link

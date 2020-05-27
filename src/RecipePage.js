@@ -6,14 +6,14 @@ import Footer from './components/Footer';
 import './App.css';
 
 
-function RecipePage({gotRecipes}) {
+function RecipePage({initial}) {
 
   let { recipe } = useParams()
 
   return (
     <div className="App">
         <Recipe recipeSlug={recipe} />
-        <ResultsMore gotRecipes={gotRecipes}/>
+        <ResultsMore gotRecipes={initial}/>
         <Footer />
     </div>
   );
