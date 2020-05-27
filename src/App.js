@@ -23,7 +23,6 @@ function App() {
   const [firstRun, setFirstRun] = useState(true);
   const history = useHistory();
 
-  let history = useHistory()
 
 //HELPER FUNCTIONS
   const searchHandler = (searchquery) => {
