@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import Categories from './categories'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from "react-router-dom";
 import { ClickAwayListener } from '@material-ui/core';
 import './navigation.css';
 
 
 function Navigation({ onSearch,  getFilter }) {
     const [cat_toggler, setCat_toggler] = useState(false)
-
+    const history = useHistory();
 
 // FUNCTION TO TOGGLE CATEGORY DIV & CLICK AWAY
     const toggleCategories = () => {
@@ -24,7 +24,7 @@ function Navigation({ onSearch,  getFilter }) {
       <ClickAwayListener onClickAway={clickAway}>
         <div className='navbar-contain'>
         <div className="navbar">
-          <Link to='/' style={{textDecoration: 'none'}}>
+          <Link to='/' style={{textDecoration: 'none'}} onClick={()=>{setTimeout(history.push('/'),100); window.location.reload()}}>
             <h1 className="navbar_cat_title"><strong>Secret</strong> Sauce</h1>
           </Link>
           <button className="navbar_cat_title" id="category_button" onClick={toggleCategories}>Categories</button>

@@ -45,7 +45,7 @@ function Category({ getFilter }) {
       <form className='category' onChange={(e) => handleCheckboxFilter(e)}>
         {mainCatData !== undefined?
           mainCatData.map(mainCat => 
-          <div className='category-item'>
+          <div className='category-item' key={mainCat.sys.id}>
             <h3>{mainCat.fields.title}</h3>
             
             {catData !== undefined?catData.map(cat => {
