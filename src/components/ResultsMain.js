@@ -20,7 +20,7 @@ const ResultsMain = (props) => {
                 props.gotRecipes.map(recipe =>  
                     recipe.sys.contentType.sys.id === 'recipe'? 
                     <Link
-                        to= ' '
+                        to= '/:recipe'
                         style={{textDecoration: 'none'}}
                         onClick={(e) =>{ history.push(`/${recipe.fields.slug}`); window.scrollTo(0,0); e.preventDefault()}} 
                         key={recipe.sys.id}
