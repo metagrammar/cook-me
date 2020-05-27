@@ -21,11 +21,13 @@ function App() {
   const [categories, setCategories] = useState()
   const [catFilter, setCatFilter] = useState([])
   const [firstRun, setFirstRun] = useState(true);
+  const history = useHistory();
 
   let history = useHistory()
 
 //HELPER FUNCTIONS
   const searchHandler = (searchquery) => {
+    history.push('/')
     setSearchToggle(1)
     setSearch(searchquery)
     history.push(`/${searchquery}`);
