@@ -17,6 +17,7 @@ function Highlight({ gotRecipes }) {
             <Carousel autoPlay={true} indicators={false} interval={4500} timeout={500}>
                 
                     {gotRecipes.slice(0,4).map(recipe => {
+                      
                       if (recipe.sys.contentType.sys.id === 'recipe') {
                         return (                        
                         <Link
