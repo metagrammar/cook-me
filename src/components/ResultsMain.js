@@ -9,7 +9,7 @@ const ResultsMain = (props) => {
     return (
         <>
             <div className='results-cards'>
-                <h1 className='main-results'>{props.searchToggle===1?`Searched by ${props.search}`:"Latest Recipes"}</h1>
+                <h1 className='main-results'>{props.searchToggle===1?`Searched: ${props.search}`:"Latest Recipes"}</h1>
                 {props.filters.length>0?
                 <div className="matches">
                     <h2 className='filter-results'>Filtered by 

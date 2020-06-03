@@ -30,8 +30,8 @@ function App() {
     history.push('/')
     setSearchToggle(1)
     setSearch(searchquery)
-    history.push(`/${searchquery}`);
-    }
+    resetFilter()
+  }
 
     
 
@@ -71,21 +71,21 @@ function App() {
     .catch(console.error)
     }
     else {
+    console.log("Useeffect of Search")
     client.getEntries({
       content_type: 'recipe',
       'query': `${search}`})
-    .then((response) => setRecipes(response.items))
+    .then((response) => {console.log(response.items); setRecipes(response.items)})
     .catch(console.error)
     }
-    
-  },[search, searchToggle])
-  
 
-  useEffect(() => {
     if (!firstRun) {
       setRecipes(initial.filter(x => catFilter.every(y => x.fields.categories.some(z => z.fields.categoryTitle === y))))
     } else setFirstRun(false)
-  }, [initial, catFilter]);
+
+
+  },[search, searchToggle])
+  
 
 
 
