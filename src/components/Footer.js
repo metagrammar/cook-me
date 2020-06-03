@@ -25,19 +25,19 @@ const Footer = () => {
                 <div className='footer-center'>
                     <div className='about'>
                         <div className='follow'>
-                        <h3>Follow Cook Me</h3>
+                        <h3>Follow Secret Sauce</h3>
                         <Link href="#" onClick={preventDefault} className={classes.linkButtons}><Facebook /></Link>
                         <Link href="#" onClick={preventDefault} className={classes.linkButtons}><Instagram /></Link>
                         <Link href="#" onClick={preventDefault}><Twitter /></Link>
                         </div>
                         <div className='contact'>
-                            <h3>Contact Cook Me</h3>
+                            <h3>Contact Secret Sauce</h3>
                             <p>Cook Me would love to hear from you, drop us a note at: 
-                            <a href="mailto:hi@cookme.com?subject=Dear cook me, can I ask you a question?"> hi@cookme.com</a>
+                            <a href="mailto:hi@secret-sauce.com?subject=Dear cook me, can I ask you a question?"> hi@secret-sauce.com</a>
                             </p>
                         </div>
                         <div className='news'>
-                        <h3>Cook Me has something to say</h3>
+                        <h3>Secret Sauce says...</h3>
                         <p>Get the newsletter.</p>
                         <div className="email-input">
                             <form name="newsletter" method="POST" data-netlify="true">
