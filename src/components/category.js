@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Hidden, useMediaQuery } from '@material-ui/core';
 import './category.css';
+import NavSearch from './NavSearch';
 
 
 
@@ -40,9 +42,22 @@ function Category({ getFilter }) {
       getFilter(tempData)
     }
 
+
+    const isMobile = useMediaQuery('(max-width: 600px)');
+    const handleHeight = isMobile ? 'categoryMobile' : ''
+    // const handleSerachInput = isMobile ? 'categoryMobile' : ''
+
     return (
       <>
-      <form className='category' onChange={(e) => handleCheckboxFilter(e)}>
+      
+      <form className={`category ${handleHeight}` }
+      onChange={(e) => handleCheckboxFilter(e)}
+      >
+      <Hidden smUp>
+          <div className='mobile-search'>
+            <NavSearch />
+          </div>
+        </Hidden>
         {mainCatData !== undefined?
           mainCatData.map(mainCat => 
           <div className='category-item' key={mainCat.sys.id}>
@@ -64,6 +79,11 @@ function Category({ getFilter }) {
               }):""} 
           </div>
           ):""}
+          <Hidden smUp>
+          <button className='mobile-accept-cats'>
+            Set filters
+          </button>
+        </Hidden>
         </form>
         
       </>
