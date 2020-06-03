@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Route, Switch, useHistory } from "react-router-dom";
 import Home from './Home'
+import Footer from './components/Footer'
 import Navigation from './components/navigation'
 import RecipePage from './RecipePage'
 
@@ -29,7 +30,10 @@ function App() {
     history.push('/')
     setSearchToggle(1)
     setSearch(searchquery)
+    history.push(`/${searchquery}`);
     }
+
+    
 
       
   const filterHandler = (filter) => {
@@ -81,7 +85,7 @@ function App() {
     if (!firstRun) {
       setRecipes(initial.filter(x => catFilter.every(y => x.fields.categories.some(z => z.fields.categoryTitle === y))))
     } else setFirstRun(false)
-  }, [catFilter]);
+  }, [initial, catFilter]);
 
 
 
@@ -97,6 +101,7 @@ function App() {
         <Route exact path='/' render={props => <Home initial={initial} gotRecipes={recipes} gotCategories={categories} searchToggle={searchToggle} search={search} filters={catFilter} resetFilter={resetFilter} {...props} />} />
       </Switch>
       }
+      <Footer/>
     </div>
   );
 }
