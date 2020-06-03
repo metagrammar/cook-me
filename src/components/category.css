@@ -1,23 +1,31 @@
 .category {
-    position: absolute;
-    grid-column: 2 / 3;
-    width: 100%;
-    top: 80px;
-    padding: 0 2em 1em;
-    background: #fff;
-    display: grid;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    box-sizing: border-box;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    grid-template-rows: 2fr;
-    grid-column-gap: 1em;
-    z-index: 1;
-    border-top: 1px solid #ececec;
+  position: absolute;
+  grid-column: 2 / 3;
+  width: 100%;
+  top: 80px;
+  padding: 0 1.5em 1em;
+  background: #fff;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+  z-index: 1;
+  border-top: 1px solid #ececec;
+  font-family: 'Montserrat', sans-serif;
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+  grid-template-rows: 3fr;
+  grid-column-gap: 1em;
+}
+
+.categoryMobile {
+  height: 100vh;
+  overflow-y: scroll;
+  justify-content: start;
 }
 
 .category-item {
   margin-bottom: 2em;
   align-self: start;
+  min-width: 200px;
 }
 
 .category h3 {
@@ -38,6 +46,14 @@ ul li {
     padding: 0.5em 0;
   }
 
+  .mobile-search {
+    display:flex;
+    padding: 1em;
+    align-self: center;
+    justify-content: center;
+    width:100%;
+  }
+
   /* Styling for checkboxes*/
   /* The container */
 .container {
@@ -46,7 +62,7 @@ ul li {
   padding-left: 35px;
   margin-bottom: 12px;
   cursor: pointer;
-  font-size: 22px;
+  font-size: 1.125rem;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -56,8 +72,8 @@ ul li {
 .container .title {
   margin-bottom: 0.5em;
 }
-/* Hide the browser's default checkbox */
 
+/* Hide the browser's default checkbox */
 .container input {
   position: absolute;
   opacity: 0;
@@ -115,8 +131,6 @@ ul li {
 
 .filter {
   display: flex;
-  /* grid-column: 1 / span 3; */
-  /* grid-row: 2 / 3; */
   max-width:280px;
   height: 100%;
   position: relative;
@@ -129,3 +143,18 @@ ul li {
 }
   /*  #F2C817; */
 
+.mobile-accept-cats {
+  outline: none;
+  width: 210px;
+  background-color: #F2C817;
+  color:#fff;
+  font-size: 1em;
+  font-family: 'Montserrat', sans-serif;
+  border: 0;
+  border-radius: 4px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  height: 40px;
+  justify-self: center;
+  margin-bottom: 8em;
+  cursor: pointer;
+}
