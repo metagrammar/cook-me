@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import Categories from './categories'
+import NavSearch from './NavSearch'
+import Categories from './categories';
 import { Link, useHistory } from "react-router-dom";
-import { ClickAwayListener } from '@material-ui/core';
+import { ClickAwayListener, Hidden } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
 import './navigation.css';
 
 
@@ -23,19 +25,32 @@ function Navigation({ onSearch,  getFilter }) {
     <div>
       <ClickAwayListener onClickAway={clickAway}>
         <div className='navbar-contain'>
-        <div className="navbar">
-          <Link to='/' style={{textDecoration: 'none'}} onClick={()=>{setTimeout(history.push('/'),100); window.location.reload()}}>
-            <h1 className="navbar_cat_title"><strong>Secret</strong> Sauce</h1>
-          </Link>
-          <button className="navbar_cat_title" id="category_button" onClick={toggleCategories}>Categories</button>
-          <div className="navbar_search edge-margin">
-            <form onSubmit={(e)=>{e.preventDefault(); onSearch(e.target[0].value)}}>
-              <input className="navbar_search" type="text" placeholder="Search for recipe.."></input>
-              <button className="navbar_search">OK</button>
-            </form>
+          <div className="navbar">
+            <Link to='/' style={{textDecoration: 'none'}} onClick={()=>{setTimeout(history.push('/'),100); window.location.reload()}}>
+              <h1 className="navbar_cat_title"><strong>Secret</strong> Sauce</h1>
+            </Link>
+
+            <Hidden xsDown>
+              <button className="navbar_cat_title" id="category_button" onClick={toggleCategories}>Categories</button>
+            </Hidden>
+            <Hidden smUp>
+              <MenuIcon onClick={toggleCategories} style={{cursor: 'pointer'}}/>
+            </Hidden>
+
+
+            <Hidden xsDown>
+              <NavSearch onSearch={onSearch} closeCategories={setCat_toggler}/>
+              {/* <div className="navbar_search edge-margin">
+                <form onSubmit={(e)=>{e.preventDefault(); onSearch(e.target[0].value)}}>
+                  <input className="navbar_search" type="text" placeholder="Search for recipe.."></input>
+                  <button className="navbar_search">OK</button>
+                </form>
+              </div> */}
+            </Hidden>
+            
+            
           </div>
-        </div>
-        {cat_toggler===true?<Categories getFilter={getFilter} />:""}
+          {cat_toggler===true?<Categories getFilter={getFilter} />:""}
         </div>
       </ClickAwayListener>
     </div>
