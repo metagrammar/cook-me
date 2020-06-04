@@ -57,6 +57,7 @@ function Category({ getFilter }) {
             <h3>{mainCat.main_cat_title}</h3>
             
             {catData !== undefined?catData.map(cat => {
+              if (mainCat.main_cat_id === cat.parent_category) {
                 return (
                 <label class='container'>
                   {cat.category_title}
@@ -66,7 +67,7 @@ function Category({ getFilter }) {
                   />
                   <span class="checkmark"></span>
                   </label>
-                )
+                )}
                 })
               :""} 
           </div>
