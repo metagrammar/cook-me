@@ -13,12 +13,12 @@ function Steps({recipeData}) {
                 <div className="steps" key={Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1)}>
                     <div className='steps-text' key={Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1)}>
                         <h4>Step {i+=1}</h4>
-                        <p>{step[0]}</p>
+                        <p>{step.description}</p>
                     </div>
                     
-                    {step[1] === "no image"? "":            
+                    {step.picture === "no image"? "":            
                     <div className='steps-image' key={Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1)}> 
-                        <img src={step[1]} alt="delicous" /> 
+                        <img src={step.picture} alt="delicous" /> 
                     </div>}  
                 </div>
                 )}
