@@ -12,15 +12,6 @@ import Steps from './steps';
 import './recipe.css';
 
 
-const contentful = require('contentful');
-
-const client = contentful.createClient({
-  space: 'on7xb2olivy7',
-  environment: 'master', // defaults to 'master' if not set
-  accessToken: process.env.REACT_APP_SECRET_SAUCE_DELIVERY_API_TOKEN
-})
-
-
 const StyledTableCell = withStyles((theme) => ({
     head: {
       backgroundColor: theme.palette.common.black,
@@ -39,28 +30,40 @@ const StyledTableCell = withStyles((theme) => ({
       },
     },
   }))(TableRow);
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
   
+  let ingridients = []
+
+
   
  function Recipe({ recipeSlug }) {
-        const [recipeData, setRecipeData] = useState()
+  const [recipeData, setRecipeData] = useState()
+  const [stepData, setStepData] = useState()
 
-        useEffect( ()=>{
-        // client.getEntry(recipeId)
-          // .then((entry) => setRecipeData(entry.fields))
-          client.getEntries({
-            content_type: 'recipe',
-            'fields.slug': `${recipeSlug}`
+    useEffect( ()=>{
+      fetch(`https://saucy-secret.herokuapp.com/recipe/${recipeSlug}`, requestOptions)
+      .then(response => response.json())
+      .then(result => setRecipeData(result))
+      .then(x => ingridients = Object.values(recipeData[0].recipe_ingredients))
+      .then(after => {
+        fetch(`https://saucy-secret.herokuapp.com/step/${recipeData[0].recipe_id}`, requestOptions)
+          .then(response => response.json())
+          .then(result => setStepData(result))
+          .catch(error => console.log('error', error));
           })
-          .then((entry) => setRecipeData(entry.items[0].fields))
-          .catch(console.error)}
-        ,[recipeSlug])
+      .catch(error => console.log('error', error));
+    },[recipeSlug,recipeData])
 
     return (
       !recipeData?"":
         <div className="recipe" id="recipe">
-          <img src={recipeData.recipeHeroImage.fields.file.url} alt={recipeData.recipeTitle} className='hero-image' />
-          <h1>{recipeData.recipeTitle}</h1>
-            <h3>{recipeData.recipeDescription}</h3>
+          <img src={recipeData[0].recipe_hero_image} alt={recipeData[0].recipe_title} className='hero-image' />
+          <h1>{recipeData[0].recipe_title}</h1>
+            <h3>{recipeData[0].recipe_description}</h3>
             <TableContainer className='table' component={Paper}>
                 <Table aria-label="customized table">
                   <TableHead>
@@ -70,7 +73,7 @@ const StyledTableCell = withStyles((theme) => ({
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {recipeData.recipeIngridientsJson.Ingridient_table.map((row) => (
+                  {ingridients.map((row) => (
                     <StyledTableRow key={row[0]+row[1]}>
                       <StyledTableCell align="left" width="20%">{row[0]}</StyledTableCell>
                       <StyledTableCell align="left">{row[1]}</StyledTableCell>
@@ -78,7 +81,9 @@ const StyledTableCell = withStyles((theme) => ({
                 </TableBody>
               </Table>
             </TableContainer>
-            <Steps recipeData={recipeData.recipeSteps.recipe_steps} />
+            {!stepData? console.log("waiting"):
+            <Steps recipeData={Object.values(stepData)} />
+            }
         </div>
     );
   }
