@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import { Route, Switch, useHistory, Redirect } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import Home from './Home'
 import Footer from './components/Footer'
 import Navigation from './components/navigation'
 import RecipePage from './RecipePage'
-import Highlight from './components/highlight';
+
 
 // API SETUP INFORMATION
 const contentful = require('contentful')
@@ -13,12 +13,6 @@ const client = contentful.createClient({
   environment: 'master', // defaults to 'master' if not set
   accessToken: process.env.REACT_APP_SECRET_SAUCE_DELIVERY_API_TOKEN
 })
-
-
-var requestOptions = {
-  method: 'GET',
-  redirect: 'follow'
-};
 
 
 function App() {
