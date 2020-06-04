@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory, Redirect } from "react-router-dom";
 import Home from './Home'
 import Footer from './components/Footer'
 import Navigation from './components/navigation'
@@ -49,7 +49,10 @@ function App() {
   const resetFilter = () => {
     setCatFilter([])
   }
-
+  const requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
 
 
 // USE EFFECTS
@@ -58,6 +61,11 @@ function App() {
       content_type: 'categories'})
     .then(response => setCategories(response.items))
     .catch(console.error)
+
+    fetch("https://cook-me-node-server.herokuapp.com/cat", requestOptions)
+    .then(response => response.json())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error))
   
     client.getEntries({
       content_type: 'recipe'})
