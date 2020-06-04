@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory, Redirect } from "react-router-dom";
 import Home from './Home'
 import Footer from './components/Footer'
 import Navigation from './components/navigation'
@@ -55,7 +55,10 @@ function App() {
   const resetFilter = () => {
     setCatFilter([])
   }
-
+  const requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
 
 // USE EFFECTS
 
