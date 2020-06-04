@@ -16,7 +16,7 @@ function Highlight({ gotRecipes }) {
         <div className="highlight">
             <Carousel autoPlay={true} indicators={false} interval={4500} timeout={500}>
 
-                    {gotRecipes.slice(0,4).map(recipe => {
+                    {gotRecipes !== undefined?gotRecipes.slice(0,4).map(recipe => {
                       
                       return (                        
                         <Link
@@ -37,7 +37,7 @@ function Highlight({ gotRecipes }) {
                             </div>  
                         </Link>
                         )}
-                      )}                 
+                      ):''}                 
             </Carousel>
             {document.getElementById('container')}
         </div>
