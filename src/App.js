@@ -4,6 +4,7 @@ import Home from './Home'
 import Footer from './components/Footer'
 import Navigation from './components/navigation'
 import RecipePage from './RecipePage'
+import Highlight from './components/highlight';
 
 // API SETUP INFORMATION
 const contentful = require('contentful')
@@ -14,12 +15,17 @@ const client = contentful.createClient({
 })
 
 
+var requestOptions = {
+  method: 'GET',
+  redirect: 'follow'
+};
+
+
 function App() {
   const [searchToggle, setSearchToggle] = useState(0)
   const [search, setSearch] = useState()
   const [recipes, setRecipes] = useState()
   const [initial, setInitial] = useState()
-  const [categories, setCategories] = useState()
   const [catFilter, setCatFilter] = useState([])
   const [firstRun, setFirstRun] = useState(true);
   const history = useHistory();
@@ -28,17 +34,17 @@ function App() {
 //HELPER FUNCTIONS
   const searchHandler = (searchquery) => {
     history.push('/')
+    if (searchquery.length > 0) {
     setSearchToggle(1)
     setSearch(searchquery)
     resetFilter()
+    }
   }
 
-    
-
-      
+     
   const filterHandler = (filter) => {
     setCatFilter(filter);
-    setRecipes(initial.filter(x => catFilter.every(y => 
+    setRecipes(recipes.filter(x => catFilter.every(y => 
       {return x.fields.categories.some(z => 
           z.fields.categoryTitle === y)
           })
@@ -54,38 +60,28 @@ function App() {
     redirect: 'follow'
   };
 
-
 // USE EFFECTS
-  useEffect( () => {
-    client.getEntries({
-      content_type: 'categories'})
-    .then(response => setCategories(response.items))
-    .catch(console.error)
 
-    fetch("https://cook-me-node-server.herokuapp.com/cat", requestOptions)
+  useEffect(()=>{
+    fetch("https://saucy-secret.herokuapp.com/", requestOptions)
     .then(response => response.json())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error))
-  
-    client.getEntries({
-      content_type: 'recipe'})
-    .then(response => setInitial(response.items))
-    .catch(console.error)
-  
+    .then(result => setInitial(result))
+    .catch(error => console.log('error', error));
+
     if (searchToggle === 0){
-    client.getEntries({
-      content_type: 'recipe'})
-    .then(response => setRecipes(response.items))
-    .catch(console.error)
-    }
+      fetch("https://saucy-secret.herokuapp.com/", requestOptions)
+      .then(response => response.json())
+      .then(result => setRecipes(result))
+      .catch(error => console.log('error', error));
+      }
+
     else {
-    console.log("Useeffect of Search")
-    client.getEntries({
-      content_type: 'recipe',
-      'query': `${search}`})
-    .then((response) => {console.log(response.items); setRecipes(response.items)})
-    .catch(console.error)
-    }
+      client.getEntries({
+        content_type: 'recipe',
+        'query': `${search}`})
+      .then((response) => {console.log(response.items); setRecipes(response.items)})
+      .catch(console.error)
+      }
 
     if (!firstRun) {
       setRecipes(initial.filter(x => catFilter.every(y => x.fields.categories.some(z => z.fields.categoryTitle === y))))
@@ -106,10 +102,10 @@ function App() {
       {!recipes?'': 
       <Switch>
         <Route path='/:recipe' render={props => <RecipePage gotRecipes={recipes} initial={initial} {...props} />} />
-        <Route exact path='/' render={props => <Home initial={initial} gotRecipes={recipes} gotCategories={categories} searchToggle={searchToggle} search={search} filters={catFilter} resetFilter={resetFilter} {...props} />} />
+        <Route exact path='/' render={props => <Home initial={initial} gotRecipes={recipes} searchToggle={searchToggle} search={search} filters={catFilter} resetFilter={resetFilter} {...props} />} />
       </Switch>
       }
-      <Footer/>
+      <Footer />
     </div>
   );
 }
