@@ -8,7 +8,7 @@ function Home(props) {
   return (
     <div className="App">
         <Highlight gotRecipes={props.initial}/>
-        <ResultsMain gotRecipes={props.gotRecipes} searchToggle={props.searchToggle} search={props.search} filters={props.filters} resetFilter={props.resetFilter}/>
+        <ResultsMain gotRecipes={props.gotRecipes} filterRecipes={props.filterRecipes} searchToggle={props.searchToggle} search={props.search} filters={props.filters} resetFilter={props.resetFilter}/>
     </div>
   );
 }

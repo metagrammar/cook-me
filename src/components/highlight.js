@@ -15,31 +15,28 @@ function Highlight({ gotRecipes }) {
       <>  
         <div className="highlight">
             <Carousel autoPlay={true} indicators={false} interval={4500} timeout={500}>
-                
+
                     {gotRecipes.slice(0,4).map(recipe => {
                       
-                      if (recipe.sys.contentType.sys.id === 'recipe') {
-                        return (                        
+                      return (                        
                         <Link
                             to=' '
                             style={{textDecoration: 'none'}}
-                            onClick={(e) => {history.push(`/${recipe.fields.slug}`); window.scrollTo(0,0); e.preventDefault()}} 
-                            key={recipe.sys.id}
+                            onClick={(e) => {history.push(`/${recipe.recipe_slug}`); window.scrollTo(0,0); e.preventDefault()}} 
+                            key={recipe.recipe_id}
                             >
                             <div className="carouselitem">
                               <CardMedia 
-                                image={recipe.fields.recipeHeroImage.fields.file.url}
+                                image={recipe.recipe_hero_image}
                                 className="img-conatin" />
                         
                                 <div className="carouselitem-card">
-                                    <h2>Best of {recipe.fields.categories[0].fields.categoryTitle}</h2>
-                                    <h1>{recipe.fields.recipeTitle}</h1>
+                                    <h2>Our recommandation:</h2>
+                                    <h1>{recipe.recipe_title}</h1>
                                 </div>
                             </div>  
                         </Link>
                         )}
-                        return (console.log("api not responded yet"))
-                        }
                       )}                 
             </Carousel>
             {document.getElementById('container')}
