@@ -19,20 +19,20 @@ const ResultsMain = (props) => {
 
                     <button className='reset-filter' onClick={()=>props.resetFilter()}>Reset Filter</button>
                 </div>:null}
+
                 <div className='cards-wrap'>
+
                 {props.gotRecipes.length>=1?
                     props.gotRecipes.map(recipe =>  
-                        recipe.sys.contentType.sys.id === 'recipe'? 
                         <Link
                             to= '/:recipe'
                             style={{textDecoration: 'none'}}
-                            onClick={(e) =>{ history.push(`/${recipe.fields.slug}`); window.scrollTo(0,0); e.preventDefault()}} 
-                            key={recipe.sys.id}
+                            onClick={(e) =>{ history.push(`/${recipe.recipe_slug}`); window.scrollTo(0,0); e.preventDefault()}} 
+                            key={recipe.recipe_id}
                             >
-                            <CardMedia className='main-card' image={recipe.fields.recipeHeroImage.fields.file.url} />
-                            <h3 className='recipe-card-title'>{recipe.fields.recipeTitle}</h3>
+                            <CardMedia className='main-card' image={recipe.recipe_hero_image} />
+                            <h3 className='recipe-card-title'>{recipe.recipe_title}</h3>
                         </Link>
-                        : ''
                         ):
                         <div className="matches" style={{flexDirection: "column", textAlign:"center", alignItems:"center", padding:"200px 0"}}>
                             <h1>There are no recipes matching your search.</h1>
