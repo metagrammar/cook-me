@@ -70,11 +70,10 @@ function App() {
       }
 
     else {
-      client.getEntries({
-        content_type: 'recipe',
-        'query': `${search}`})
-      .then((response) => {console.log(response.items); setRecipes(response.items)})
-      .catch(console.error)
+      fetch(`https://saucy-secret.herokuapp.com/search/${search}`, requestOptions)
+      .then(response => response.json())
+      .then(result => setRecipes(result))
+      .catch(error => console.log('error', error));
       }
 
     if (!firstRun) {
