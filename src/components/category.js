@@ -50,7 +50,7 @@ function Category({ getFilter }) {
     return (
       <>
       
-      <form className={`category ${handleHeight}` }
+      <div className={`category ${handleHeight}` }
       onChange={(e) => handleCheckboxFilter(e)}
       >
       <Hidden smUp>
@@ -84,7 +84,7 @@ function Category({ getFilter }) {
             Set filters
           </button>
         </Hidden>
-        </form>
+        </div>
         
       </>
       );}
