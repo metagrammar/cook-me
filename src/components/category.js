@@ -38,18 +38,19 @@ function Category({ getFilter }) {
 
     const isMobile = useMediaQuery('(max-width: 600px)');
     const handleHeight = isMobile ? 'categoryMobile' : ''
-    // const handleSerachInput = isMobile ? 'categoryMobile' : ''
+    const handleCatFormWidth = isMobile ? 'catFormMobile' : ''
 
     return (
       <>
-      <form className={`category ${handleHeight}` }
-      onChange={(e) => handleCheckboxFilter(e)}
+      <div className={`category ${handleHeight}` }
+      // onChange={(e) => handleCheckboxFilter(e)}
       >
       <Hidden smUp>
-          <div className='mobile-search'>
-            <NavSearch />
-          </div>
-        </Hidden>
+        <div className='mobile-search'>
+          <NavSearch />
+        </div>
+      </Hidden>
+      <form className={`cat-form ${handleCatFormWidth}` } onChange={(e) => handleCheckboxFilter(e)}>
         {mainCatData !== undefined?
           mainCatData.map(mainCat => 
           <div className='category-item' key={mainCat.main_cat_id}>
@@ -75,7 +76,8 @@ function Category({ getFilter }) {
           <Hidden smUp>
           <button className='mobile-accept-cats'>Set filters</button>
           </Hidden>
-      </form>
+          </form>
+      </div>
       </>
       );
     }
