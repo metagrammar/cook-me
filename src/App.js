@@ -31,7 +31,8 @@ function App() {
   }
      
   const filterHandler = (filter) => {
-    setSearchToggle(0)
+    // setSearchToggle(0)
+    console.log(filter)
     setCatFilter(filter)
     if (filter.length === 0) {
     fetch(`https://saucy-secret.herokuapp.com/`, requestOptions)
