@@ -9,7 +9,7 @@ var requestOptions = {
 };
 
 
-function Category({ getFilter }) {
+function Category({ getFilter, closeCategories, onSearch }) {
   const [catData, setCatData] = useState()
   const [mainCatData, setMainCatData] = useState()
 
@@ -47,7 +47,7 @@ function Category({ getFilter }) {
       >
       <Hidden smUp>
         <div className='mobile-search'>
-          <NavSearch />
+          <NavSearch onSearch={onSearch}/>
         </div>
       </Hidden>
       <form className={`cat-form ${handleCatFormWidth}` } onChange={(e) => handleCheckboxFilter(e)}>
@@ -74,7 +74,7 @@ function Category({ getFilter }) {
           </div>
           ):""}
           <Hidden smUp>
-          <button className='mobile-accept-cats'>Set filters</button>
+          <button className='mobile-accept-cats' type="button" onClick={closeCategories}>Set filters</button>
           </Hidden>
           </form>
       </div>

@@ -12,12 +12,13 @@ function App() {
   const [initial, setInitial] = useState()
   const [catFilter, setCatFilter] = useState([])
   const [filterMatch, setFilterMatch] = useState()
-  const [firstRun, setFirstRun] = useState(true);
+  // const [firstRun, setFirstRun] = useState(true);
   const history = useHistory();
 
 
 //HELPER FUNCTIONS
   const searchHandler = (searchquery) => {
+    console.log(searchquery)
     history.push('/')
     if (searchquery.length > 0) {
     setSearchToggle(1)
@@ -50,12 +51,7 @@ function App() {
       .then(response => response.json())
       .then(result => setRecipes(result))
       .catch(error => console.log('error', error));
-
     }
-  
-      // let fm = filterMatch.map(filter=>filter.recipe_id)
-      // let fn = (initial.filter(recipe => fm.includes(recipe.recipe_id)))
-      // setRecipes(fn)
   }
 
   
@@ -83,13 +79,12 @@ function App() {
       .catch(error => console.log('error', error));
       }
     
-    if (!filterMatch) {
+    else if (!filterMatch) {
       fetch("https://saucy-secret.herokuapp.com/", requestOptions)
       .then(response => response.json())
       .then(result => setRecipes(result))
       .catch(error => console.log('error', error));
     }
-
 
   },[search, searchToggle])
   
