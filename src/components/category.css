@@ -11,9 +11,19 @@
   border-top: 1px solid #ececec;
   font-family: 'Montserrat', sans-serif;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
+  /* grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); */
   grid-template-rows: 3fr;
   grid-column-gap: 1em;
+}
+
+.cat-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
+}
+
+.catFormMobile {
+  display: grid;
+  grid-template-columns: 1fr;
 }
 
 .categoryMobile {
